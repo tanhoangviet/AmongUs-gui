@@ -1,0 +1,18 @@
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") == nil and game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 2125950512) and game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 2147429609) then
+fireclickdetector(workspace.Lobby["rob"].ClickDetector)
+game:GetService("ReplicatedStorage").rob:FireServer()
+wait(4.8)
+fireclickdetector(workspace.Lobby["bob"].ClickDetector)
+game:GetService("ReplicatedStorage").bob:FireServer()
+wait(0.5)
+for i = 1,26 do
+for _, v in pairs(workspace:GetChildren()) do
+if v.Name:match(game.Players.LocalPlayer.Name) and v:FindFirstChild("HumanoidRootPart") then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+end
+end
+task.wait()
+end
+else
+print("You have in lobby, or You don't have badge bob, and badge rob.")
+end
