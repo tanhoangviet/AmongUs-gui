@@ -34,24 +34,34 @@ local OrionLib = {
             Divider = Color3.fromRGB(50, 150, 50), -- Dark greenish divider color
             Text = Color3.fromRGB(255, 255, 255), -- White text color
             TextDark = Color3.fromRGB(200, 200, 200) -- Light grayish text color
+        },
+        KindaRedKindaPink = {
+            Main = Color3.fromRGB(255, 120, 120), -- Red main color
+            Second = Color3.fromRGB(255, 180, 180), -- Light red second color
+            Stroke = Color3.fromRGB(255, 50, 50), -- Dark red stroke color
+            Divider = Color3.fromRGB(255, 50, 50), -- Dark red divider color
+            Text = Color3.fromRGB(255, 200, 200), -- Light pink text color
+            TextDark = Color3.fromRGB(200, 150, 150) -- Dark pink text color
         }
     },
-    SelectedTheme = "Default",
+    SelectedTheme = "KindaRedKindaPink",
     Folder = nil,
     SaveCfg = false
 }
 
--- Function to apply a theme
 function OrionLib:ApplyTheme(themeName)
-    if self.Themes[themeName] then
-        self.SelectedTheme = themeName
+    local newTheme = themeName or "Default" -- If no themeName provided, set to "Default"
+    if self.Themes[newTheme] then
+        self.SelectedTheme = newTheme
         -- Apply theme to UI elements, if needed
-        print("Theme '" .. themeName .. "' applied.")
+        print("Theme '" .. newTheme .. "' applied.")
     else
-        warn("Theme '" .. themeName .. "' does not exist.")
+        warn("Theme '" .. newTheme .. "' does not exist. Default theme applied.")
     end
 end
 
+-- Set the default theme
+ the code...
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
 local Icons = {}
