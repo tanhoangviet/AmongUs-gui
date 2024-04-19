@@ -6,8 +6,8 @@ local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
 -- Function to calculate rainbow color
-local function RainbowColor()
-    local hue = (tick() % 5) / 5  -- Adjust the value to control the speed of the rainbow animation
+local function RainbowColor(time)
+    local hue = (tick() % time) / time  -- Adjust the value to control the speed of the rainbow animation
     return Color3.fromHSV(hue, 1, 1)
 end
 
@@ -18,30 +18,18 @@ local OrionLib = {
     Flags = {},
     Themes = {
         Default = {
-    Main = RainbowColor(),
-    Second = RainbowColor(),
-    Stroke = RainbowColor(),
-    Divider = RainbowColor(),
-    Text = RainbowColor():Lerp(Color3.new(1, 1, 1), 0.5),  -- Fade color at 50% transparency
-    TextDark = RainbowColor():Lerp(Color3.new(0.5, 0.5, 0.5), 0.5)  -- Fade color at 50% transparency
-     }
+            Main = RainbowColor(5), -- Rainbow color for Main theme
+            Second = RainbowColor(5), -- Rainbow color for Second theme
+            Stroke = RainbowColor(5), -- Rainbow color for Stroke theme
+            Divider = RainbowColor(5), -- Rainbow color for Divider theme
+            Text = RainbowColor(5):Lerp(Color3.new(1, 1, 1), 0.5), -- Fade color at 50% transparency for Text theme
+            TextDark = RainbowColor(5):Lerp(Color3.new(0.5, 0.5, 0.5), 0.5) -- Fade color at 50% transparency for TextDark theme
+        }
     },
     SelectedTheme = "Default",
     Folder = nil,
     SaveCfg = false
 }
-
--- Function to apply a theme
-function OrionLib:ApplyTheme(themeName)
-    if self.Themes[themeName] then
-        self.SelectedTheme = themeName
-        -- Apply theme to UI elements, if needed
-        print("Theme '" .. themeName .. "' applied.")
-    else
-        warn("Theme '" .. themeName .. "' does not exist.")
-    end
-end
-
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
 local Icons = {}
