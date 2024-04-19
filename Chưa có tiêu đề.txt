@@ -5,6 +5,12 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
+-- Function to calculate rainbow color
+local function RainbowColor()
+    local hue = (tick() % 5) / 5  -- Adjust the value to control the speed of the rainbow animation
+    return Color3.fromHSV(hue, 1, 1)
+end
+
 local OrionLib = {
     Elements = {},
     ThemeObjects = {},
@@ -12,29 +18,13 @@ local OrionLib = {
     Flags = {},
     Themes = {
         Default = {
-            Main = Color3.fromRGB(0, 0, 0),
-            Second = Color3.fromRGB(10, 10, 10),
-            Stroke = Color3.fromRGB(60, 60, 60),
-            Divider = Color3.fromRGB(60, 60, 60),
-            Text = Color3.fromRGB(240, 240, 240),
-            TextDark = Color3.fromRGB(150, 150, 150)
-        },
-        Winter = {
-            Main = Color3.fromRGB(150, 200, 255), -- Light blue main color
-            Second = Color3.fromRGB(200, 230, 255), -- Light blue second color
-            Stroke = Color3.fromRGB(100, 150, 200), -- Light blue stroke color
-            Divider = Color3.fromRGB(100, 150, 200), -- Light blue divider color
-            Text = Color3.fromRGB(255, 255, 255), -- White text color
-            TextDark = Color3.fromRGB(200, 200, 200) -- Light grayish text color
-        },
-        Spring = {
-            Main = Color3.fromRGB(100, 200, 100), -- Greenish main color
-            Second = Color3.fromRGB(150, 220, 150), -- Light greenish second color
-            Stroke = Color3.fromRGB(50, 150, 50), -- Dark greenish stroke color
-            Divider = Color3.fromRGB(50, 150, 50), -- Dark greenish divider color
-            Text = Color3.fromRGB(255, 255, 255), -- White text color
-            TextDark = Color3.fromRGB(200, 200, 200) -- Light grayish text color
-        }
+    Main = RainbowColor(),
+    Second = RainbowColor(),
+    Stroke = RainbowColor(),
+    Divider = RainbowColor(),
+    Text = RainbowColor():Lerp(Color3.new(1, 1, 1), 0.5),  -- Fade color at 50% transparency
+    TextDark = RainbowColor():Lerp(Color3.new(0.5, 0.5, 0.5), 0.5)  -- Fade color at 50% transparency
+     }
     },
     SelectedTheme = "Default",
     Folder = nil,
@@ -391,6 +381,14 @@ CreateElement("Label", function(Text, TextSize, Transparency)
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
 	return Label
+end)
+
+CreateElement(elementType, props)
+    local element = Instance.new(elementType)
+    for prop, value in pairs(props) do
+        element[prop] = value
+    end
+    return element
 end)
 
 local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
