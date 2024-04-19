@@ -5,12 +5,6 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
--- Function to calculate rainbow color
-local function RainbowColor(time)
-    local hue = (tick() % time) / time  -- Adjust the value to control the speed of the rainbow animation
-    return Color3.fromHSV(hue, 1, 1)
-end
-
 local OrionLib = {
     Elements = {},
     ThemeObjects = {},
@@ -18,12 +12,12 @@ local OrionLib = {
     Flags = {},
     Themes = {
         Default = {
-            Main = RainbowColor(5), -- Rainbow color for Main theme
-            Second = RainbowColor(5), -- Rainbow color for Second theme
-            Stroke = RainbowColor(5), -- Rainbow color for Stroke theme
-            Divider = RainbowColor(5), -- Rainbow color for Divider theme
-            Text = RainbowColor(5):Lerp(Color3.new(1, 1, 1), 0.5), -- Fade color at 50% transparency for Text theme
-            TextDark = RainbowColor(5):Lerp(Color3.new(0.5, 0.5, 0.5), 0.5) -- Fade color at 50% transparency for TextDark theme
+            Main = Color3.fromRGB(207, 89, 26), -- Rich orange-brown for the main color
+            Second = Color3.fromRGB(245, 166, 35), -- Warm golden yellow for the second color
+            Stroke = Color3.fromRGB(158, 63, 18), -- Dark brown stroke color
+            Divider = Color3.fromRGB(158, 63, 18), -- Dark brown divider color
+            Text = Color3.fromRGB(240, 240, 240), -- White text color
+            TextDark = Color3.fromRGB(150, 150, 150) -- Light grayish text color
         }
     },
     SelectedTheme = "Default",
