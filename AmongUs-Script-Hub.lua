@@ -24,7 +24,6 @@ function CorrectKeyNotifications()
         Image = "rbxassetid://4483345998",
         Time = 5
     })
-    OrionLib:Destroy()
 end
 
 function WrongKeyNotifications()
