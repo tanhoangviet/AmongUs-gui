@@ -14,10 +14,10 @@ local Window = Fluent:CreateWindow({
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
+	Tool = Window:AddTab({ Title = "Tool", Icon = "rbxassetid://17296506044" }),
     Main = Window:AddTab({ Title = "All Slap Battles Hub", Icon = "rbxassetid://17310802204" }),
     fe = Window:AddTab({ Title = "All Script Fe +", Icon = "rbxassetid://17278622420" }),
     badges = Window:AddTab({ Title = "Badges Hub", Icon = "rbxassetid://17310780952" }),
-    Tool = Window:AddTab({ Title = "Tool", Icon = "rbxassetid://17296506044" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -130,7 +130,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet("https://raw.githubusercontent.com/dizyhvh/slap_battles_gui/main/0.lua"), true))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/dizyhvh/slap_battles_gui/main/0.lua"))()
                         end
                     },
                     {
@@ -929,44 +929,6 @@ end
             })
         end
     })
-    
-    Tabs.badges:AddButton({
-        Title = "Auto Redacted Gloves",
-        Description = "By Giang Gaster",
-        Callback = function()
-            Window:Dialog({
-                Title = "Run",
-                Content = "Run Script?",
-                Buttons = {
-                    {
-                        Title = "Confirm",
-                        Callback = function()
-                            print("Confirmed the dialog.")
-                            if game.Players.LocalPlayer.leaderstats.Slaps.Value >= 5000 then
-Door = 0
-for i = 1, 10 do
-Door = Door + 1
-if game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 2124847850) then
-else
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.PocketDimension.Doors[Door].TouchInterest.Parent, 0)
-firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.PocketDimension.Doors[Door].TouchInterest.Parent, 1)
-wait(3.75)
-end
-end
-end
-                        end
-                    },
-                    {
-                        Title = "Cancel",
-                        Callback = function()
-                            print("Cancelled the dialog.")
-                        end
-                    }
-                }
-            })
-        end
-    })
-    
     
     Tabs.Tool:AddParagraph({
         Title = "",
