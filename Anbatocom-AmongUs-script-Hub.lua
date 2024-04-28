@@ -14,10 +14,11 @@ local Window = Fluent:CreateWindow({
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
-    Main = Window:AddTab({ Title = "All Hub", Icon = "rbxassetid://17272874066" }),
+    Main = Window:AddTab({ Title = "All Slap Battles Hub", Icon = "rbxassetid://17310802204" }),
     fe = Window:AddTab({ Title = "All Script Fe +", Icon = "rbxassetid://17278622420" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
-    Tool = Window:AddTab({ Title = "Tool", Icon = "rbxassetid://17296506044" })
+    badges = Window:AddTab({ Title = "Badges Hub", Icon = "rbxassetid://17310780952" }),
+    Tool = Window:AddTab({ Title = "Tool", Icon = "rbxassetid://17296506044" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
 local Options = Fluent.Options
@@ -51,7 +52,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"), true))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()
                         end
                     },
                     {
@@ -77,7 +78,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet('https://pastebin.com/raw/t9XmdEFT'), true))()
+                            loadstring(game:HttpGet('https://pastebin.com/raw/t9XmdEFT'))()
                         end
                     },
                     {
@@ -103,7 +104,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet('https://pastefy.app/geozYRNU/raw'), true))()
+                            loadstring(game:HttpGet('https://pastefy.app/geozYRNU/raw'))()
                         end
                     },
                     {
@@ -155,7 +156,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet("https://raw.githubusercontent.com/cheesynob39/R2O/main/LOADSTRING.lua"), true))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/cheesynob39/R2O/main/LOADSTRING.lua"))()
                         end
                     },
                     {
@@ -181,7 +182,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet(("https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Slap%20Battles"), true))()
+                            loadstring(game:HttpGet(("https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Slap%20Battles")))()
                         end
                     },
                     {
@@ -207,7 +208,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet(("https://raw.githubusercontent.com/Dusty1234567890/TestMain/main/SLAPBATTLESGUI5"), true))()
+                            loadstring(game:HttpGet(("https://raw.githubusercontent.com/Dusty1234567890/TestMain/main/SLAPBATTLESGUI5")))()
                         end
                     },
                     {
@@ -233,7 +234,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet("https://raw.githubusercontent.com/thanhdat4461/BaconScripterLua/main/OPSlapsFarm.lua"), true))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/thanhdat4461/BaconScripterLua/main/OPSlapsFarm.lua"))()
                         end
                     },
                     {
@@ -285,7 +286,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet("https://raw.githubusercontent.com/Usehsbd/DestroyerHub/main/DestHubPublic"), true))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/Usehsbd/DestroyerHub/main/DestHubPublic"))()
                         end
                     },
                     {
@@ -316,7 +317,7 @@ do
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet("https://raw.githubusercontent.com/tanhoangviet/AmongUs-gui/main/Black%20Hole%20V2"), true))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/tanhoangviet/AmongUs-gui/main/Black%20Hole%20V2"))()
                         end
                     },
                     {
@@ -514,7 +515,7 @@ end
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'), true))()
+                            loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
                         end
                     },
                     {
@@ -644,7 +645,7 @@ end
                         Title = "Confirm",
                         Callback = function()
                             print("Confirmed the dialog.")
-                            loadstring(game:HttpGet(('https://pastefy.app/EOgPqinS/raw'),true))()
+                            loadstring(game:HttpGet(('https://pastefy.app/EOgPqinS/raw')))()
                         end
                     },
                     {
@@ -787,6 +788,185 @@ end
             })
         end
     })
+    
+    Tabs.badges:AddParagraph({
+        Title = "All Badges in Slap Battles",
+        Content = "Subscribe To AmongUs"
+    })
+    
+    Tabs.badges:AddButton({
+        Title = "Get Frost Bite",
+        Description = "By DonjoDx\n create By firepp",
+        Callback = function()
+            Window:Dialog({
+                Title = "Run",
+                Content = "Run Script?",
+                Buttons = {
+                    {
+                        Title = "Confirm",
+                        Callback = function()
+                            print("Confirmed the dialog.")
+                            if  game.PlaceId ~= 17290438723 then
+game:GetService("TeleportService"):Teleport(17290438723)
+elseif game.PlaceId == 17290438723 then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-558, 182, 54)
+local function fireAllProximityPrompts()
+    for _, descendant in ipairs(workspace:GetDescendants()) do
+        if descendant:IsA("ProximityPrompt") then
+            fireproximityprompt(descendant)
+        end
+    end
+end
+
+-- Trigger all ProximityPrompts
+fireAllProximityPrompts()
+end
+                        end
+                    },
+                    {
+                        Title = "Cancel",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    Tabs.badges:AddButton({
+        Title = "Instant Lamp Gloves",
+        Description = "By DonjoDx\n Required 70 slap and use ZZZZZZ gloves",
+        Callback = function()
+            Window:Dialog({
+                Title = "Run",
+                Content = "Run Script?",
+                Buttons = {
+                    {
+                        Title = "Confirm",
+                        Callback = function()
+                            print("Confirmed the dialog.")
+                            for i = 1,5 do
+game:GetService("ReplicatedStorage").nightmare:FireServer("LightBroken")
+end
+                        end
+                    },
+                    {
+                        Title = "Cancel",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    Tabs.badges:AddButton({
+        Title = "Auto Couter",
+        Description = "By Giang and Gaster",
+        Callback = function()
+            Window:Dialog({
+                Title = "Run",
+                Content = "Run Script?",
+                Buttons = {
+                    {
+                        Title = "Confirm",
+                        Callback = function()
+                            print("Confirmed the dialog.")
+                            if not workspace:FindFirstChild("Keypad") then
+    for _, server in ipairs(game.HttpService:JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+        if server.playing < server.maxPlayers and server.JobId ~= game.JobId then
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, server.id)
+        end
+    end
+else
+local teleportFunc = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
+if teleportFunc then
+    teleportFunc([[
+        if not game:IsLoaded() then
+            game.Loaded:Wait()
+        end
+        repeat wait() until game.Players.LocalPlayer
+    task.wait(5)
+Time = 121
+fireclickdetector(game.Workspace.CounterLever.ClickDetector)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0,100,0)
+wait(0.2)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+for i = 1,Time do
+Time = Time - 1
+game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Error",Text = "You wait time [ "..Time.." ] receive.",Icon = "rbxassetid://7733658504",Duration = 2})
+wait(1)
+end
+for i,v in pairs(workspace.Maze:GetDescendants()) do
+if v:IsA("ClickDetector") then
+fireclickdetector(v)
+end
+end
+    ]])
+end
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Keypad.Buttons.Enter.CFrame
+fireclickdetector(workspace:WaitForChild("Keypad").Buttons:FindFirstChild("Reset").ClickDetector)
+local digits = tostring((#game.Players:GetPlayers()) * 25 + 1100 - 7)
+for i = 1, #digits do
+task.wait(0.8)
+local digit = digits:sub(i, i)
+fireclickdetector(workspace:WaitForChild("Keypad").Buttons:FindFirstChild(digit).ClickDetector)
+end
+task.wait(0.5)
+fireclickdetector(workspace:WaitForChild("Keypad").Buttons:FindFirstChild("Enter").ClickDetector)
+end
+                        end
+                    },
+                    {
+                        Title = "Cancel",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    Tabs.badges:AddButton({
+        Title = "Auto Redacted Gloves",
+        Description = "By Giang Gaster",
+        Callback = function()
+            Window:Dialog({
+                Title = "Run",
+                Content = "Run Script?",
+                Buttons = {
+                    {
+                        Title = "Confirm",
+                        Callback = function()
+                            print("Confirmed the dialog.")
+                            if game.Players.LocalPlayer.leaderstats.Slaps.Value >= 5000 then
+Door = 0
+for i = 1, 10 do
+Door = Door + 1
+if game:GetService("BadgeService"):UserHasBadgeAsync(game.Players.LocalPlayer.UserId, 2124847850) then
+else
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.PocketDimension.Doors[Door].TouchInterest.Parent, 0)
+firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("Head"), workspace.PocketDimension.Doors[Door].TouchInterest.Parent, 1)
+wait(3.75)
+end
+end
+end
+                        end
+                    },
+                    {
+                        Title = "Cancel",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
     
     Tabs.Tool:AddParagraph({
         Title = "",
