@@ -221,7 +221,7 @@ function hoho:Window(hub, the_game_name, main_color)
 	BlackBackground.Parent = Top_Bar
 	BlackBackground.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
 	BlackBackground.BackgroundTransparency = 1
-	BlackBackground.Image = "rbxassetid://297774371"
+	BlackBackground.Image = "rbxassetid://17202036908"
 	BlackBackground.ImageTransparency = 0
 	BlackBackground.BorderSizePixel = 0
 	BlackBackground.Position = UDim2.new(-0.000204942495, 0, 1, 0)
