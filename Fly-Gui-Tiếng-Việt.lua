@@ -142,11 +142,11 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 Duration = 5;
 
 game:GetService("StarterGui"):SetCore("SendNotification", { 
-	Title = "Dumb family support";
-	Text = "discord.gg/dumbfamilys";
-	Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+	Title = "The Lab support";
+	Text = "https://discord.com/invite/hBJNFFkP";
+	Icon = "rbxassetid://17310949775"})
 Duration = 5;
-    setclipboard("discord.gg/dumbfamilys");
+    setclipboard("https://discord.com/invite/hBJNFFkP");
 
 Frame.Active = true -- main = gui
 Frame.Draggable = true
