@@ -155,8 +155,6 @@ do
                 Font = Enum.Font.GothamBold,
                 Position = UDim2.new(0, 8, 0, 8),
                 Name = "TopBarTitle"
-                Active = true
-                Draggable= true
             }),
         })
         -- TopBarTitle.Size = UDim2.new(0,TopBarTitle.TextBounds.X, 0, 0)
@@ -170,8 +168,6 @@ do
             Font = Enum.Font.Gotham,
             Position = UDim2.new(1,-7,0,3),
             Name = "Version"
-            Active = true
-            Draggable= true
         })
 
         --//Content Containers
