@@ -572,6 +572,23 @@ if fluxusUI then
             guiObject.Image = "rbxassetid://18345871539" -- Đổi logo
         end
 
+        if guiObject:IsA("TextLabel") or guiObject:IsA("TextButton") or guiObject:IsA("TextBox") then
+            guiObject.TextColor3 = Color3.fromRGB(255, 255, 255) -- Text màu sáng và trắng
+        end
+
+        if guiObject:IsA("Frame") or guiObject:IsA("ScrollingFrame") or guiObject:IsA("TextBox") then
+            guiObject.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Màu đen
+        end
+
+        if guiObject:IsA("TextButton") then
+            guiObject.BackgroundColor3 = Color3.fromRGB(0, 102, 204) -- Button màu xanh lam
+        end
+
+        if guiObject:IsA("TextLabel") then
+            guiObject.BackgroundColor3 = Color3.fromRGB(128, 128, 128) -- Màu xám
+        end
+    end
+
     local function applyRainbowEffect(guiObject)
         local colors = {
             Color3.fromRGB(255, 0, 0),   -- Red
