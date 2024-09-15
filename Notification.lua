@@ -1,147 +1,152 @@
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
 local NotificationLibrary = {}
+NotificationLibrary.__index = NotificationLibrary
 
-local function checkForExistingNotification(title, subtitle, description)
-    for _, gui in pairs(game.CoreGui:GetChildren()) do
-        if gui:IsA("ScreenGui") and gui:FindFirstChild("MainFrame") then
-            local existingTitle = gui.MainFrame:FindFirstChild("Title")
-            local existingSubtitle = gui.MainFrame:FindFirstChild("SubTitle")
-            local existingDescription = gui.MainFrame:FindFirstChild("Description")
-            if existingTitle and existingSubtitle and existingDescription then
-                if existingTitle.Text == title and existingSubtitle.Text == subtitle and existingDescription.Text == description then
-                    return gui
-                end
-            end
-        end
-    end
-    return nil
+local function createNotificationCenter()
+    local player = Players.LocalPlayer
+    local playerGui = player:WaitForChild("PlayerGui")
+
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = playerGui
+
+    local notificationCenter = Instance.new("Frame")
+    notificationCenter.Size = UDim2.new(0.3, 0, 1, 0)
+    notificationCenter.Position = UDim2.new(0.7, 0, 0, 0)
+    notificationCenter.BackgroundTransparency = 1
+    notificationCenter.Parent = screenGui
+
+    return notificationCenter
 end
 
-local function moveNotificationsUp()
-    for _, gui in pairs(game.CoreGui:GetChildren()) do
-        if gui:IsA("ScreenGui") and gui:FindFirstChild("MainFrame") then
-            local mainFrame = gui.MainFrame
-            mainFrame:TweenPosition(
-                UDim2.new(1, -320, mainFrame.Position.Y.Scale - 0.15, mainFrame.Position.Y.Offset), 
-                Enum.EasingDirection.Out, 
-                Enum.EasingStyle.Sine, 
-                0.5, 
-                true
-            )
-        end
+local notificationCenter = createNotificationCenter()
+local notifications = {}
+
+local function updateNotificationPositions()
+    for i, notification in ipairs(notifications) do
+        local targetPos = UDim2.new(0, 0, 1, -(110 * i + 10 * (i - 1)) - 10)
+        TweenService:Create(notification, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = targetPos}):Play()
     end
 end
 
-function NotificationLibrary:makenotify(config)
-    local existingNotification = checkForExistingNotification(config.title, config.Subtitle, config.Description)
-    if existingNotification then
-        existingNotification.MainFrame.ZIndex = existingNotification.MainFrame.ZIndex + 1
-        return
+function NotificationLibrary:CreateNotification(config)
+    local title = config.title or "Title"
+    local subtitle = config.subtitle or "Subtitle"
+    local description = config.description or "Description"
+    local iconImage = config.iconImage or ""
+    local cooldown = config.cooldown or 5
+
+    local notification = Instance.new("Frame")
+    notification.Size = UDim2.new(1, -10, 0, 100)
+    notification.Position = UDim2.new(0, 5, 1, 10)
+    notification.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    notification.BorderSizePixel = 2
+    notification.Parent = notificationCenter
+
+    local uiCorner = Instance.new("UICorner")
+    uiCorner.CornerRadius = UDim.new(0, 10)
+    uiCorner.Parent = notification
+
+    table.insert(notifications, 1, notification)
+
+    if iconImage ~= "" then
+        local icon = Instance.new("ImageLabel")
+        icon.Size = UDim2.new(0, 50, 0, 50)
+        icon.Position = UDim2.new(0, 5, 0, 10)
+        icon.BackgroundTransparency = 1
+        icon.Image = iconImage
+        icon.Parent = notification
     end
 
-    moveNotificationsUp()
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(1, -60, 0.3, 0)
+    titleLabel.Position = UDim2.new(0, 60, 0, 5)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.Text = title
+    titleLabel.Font = Enum.Font.SourceSansBold
+    titleLabel.TextSize = 18
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    titleLabel.Parent = notification
 
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Parent = game.CoreGui
+    local subtitleLabel = Instance.new("TextLabel")
+    subtitleLabel.Size = UDim2.new(1, -60, 0.2, 0)
+    subtitleLabel.Position = UDim2.new(0, 60, 0.3, 0)
+    subtitleLabel.BackgroundTransparency = 1
+    subtitleLabel.TextColor3 = Color3.fromRGB(105, 105, 105)
+    subtitleLabel.Text = subtitle
+    subtitleLabel.Font = Enum.Font.SourceSans
+    subtitleLabel.TextSize = 14
+    subtitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    subtitleLabel.Parent = notification
 
-    local MainFrame = Instance.new("Frame")
-    MainFrame.Parent = ScreenGui
-    MainFrame.Name = "MainFrame"
-    MainFrame.Size = UDim2.new(0, 300, 0, 150)
-    MainFrame.Position = UDim2.new(1, 300, 1, -160)
-    MainFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-    MainFrame.BorderSizePixel = 0
-    MainFrame.BackgroundTransparency = 0.2
-    MainFrame.Visible = true
-    MainFrame.ZIndex = 1
+    local descriptionLabel = Instance.new("TextLabel")
+    descriptionLabel.Size = UDim2.new(1, -60, 0.3, 0)
+    descriptionLabel.Position = UDim2.new(0, 60, 0.5, 0)
+    descriptionLabel.BackgroundTransparency = 1
+    descriptionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    descriptionLabel.Text = description
+    descriptionLabel.Font = Enum.Font.SourceSans
+    descriptionLabel.TextSize = 14
+    descriptionLabel.TextWrapped = true
+    descriptionLabel.TextXAlignment = Enum.TextXAlignment.Left
+    descriptionLabel.Parent = notification
 
-    local UICorner = Instance.new("UICorner")
-    UICorner.CornerRadius = UDim.new(0, 10)
-    UICorner.Parent = MainFrame
+    local timeBar = Instance.new("Frame")
+    timeBar.Size = UDim2.new(1, 0, 0, 5)
+    timeBar.Position = UDim2.new(0, 0, 1, -5)
+    timeBar.BackgroundColor3 = Color3.fromRGB(0, 122, 204)
+    timeBar.BorderSizePixel = 0
+    timeBar.Parent = notification
 
-    MainFrame:TweenPosition(UDim2.new(1, -320, 1, -160), Enum.EasingDirection.Out, Enum.EasingStyle.Bounce, 0.5)
+    local showTween = TweenService:Create(notification, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position = UDim2.new(0, 5, 1, -110)})
+    showTween:Play()
+    updateNotificationPositions()
 
-    local Title = Instance.new("TextLabel")
-    Title.Parent = MainFrame
-    Title.Name = "Title"
-    Title.Size = UDim2.new(1, 0, 0.2, 0)
-    Title.Position = UDim2.new(0, 0, 0, 0)
-    Title.BackgroundTransparency = 1
-    Title.Text = config.title or "Title"
-    Title.Font = Enum.Font.GothamBold
-    Title.TextSize = 20
-    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-
-    local SubTitle = Instance.new("TextLabel")
-    SubTitle.Parent = MainFrame
-    SubTitle.Name = "SubTitle"
-    SubTitle.Size = UDim2.new(1, 0, 0.2, 0)
-    SubTitle.Position = UDim2.new(0, 0, 0.2, 0)
-    SubTitle.BackgroundTransparency = 1
-    SubTitle.Text = config.Subtitle or "Subtitle"
-    SubTitle.Font = Enum.Font.Gotham
-    SubTitle.TextSize = 18
-    SubTitle.TextColor3 = Color3.fromRGB(180, 180, 180)
-
-    local Description = Instance.new("TextLabel")
-    Description.Parent = MainFrame
-    Description.Name = "Description"
-    Description.Size = UDim2.new(1, 0, 0.4, 0)
-    Description.Position = UDim2.new(0, 0, 0.4, 0)
-    Description.BackgroundTransparency = 1
-    Description.Text = config.Description or "Description goes here."
-    Description.Font = Enum.Font.Gotham
-    Description.TextSize = 16
-    Description.TextColor3 = Color3.fromRGB(180, 180, 180)
-    Description.TextWrapped = true
-
-    local Button
-    if config.Button and config.Button[1] == "true" then
-        Button = Instance.new("TextButton")
-        Button.Parent = MainFrame
-        Button.Size = UDim2.new(0.4, 0, 0.15, 0)
-        Button.Position = UDim2.new(0.3, 0, 0.85, -10)
-        Button.Text = config.Button[2].name or "Button"
-        Button.Font = Enum.Font.GothamBold
-        Button.TextSize = 16
-        Button.TextColor3 = Color3.new(1, 1, 1)
-        Button.BackgroundColor3 = Color3.new(0.2, 0.7, 0.2)
-
-        local ButtonCorner = Instance.new("UICorner")
-        ButtonCorner.CornerRadius = UDim.new(0, 8)
-        ButtonCorner.Parent = Button
-
-        Button.MouseButton1Click:Connect(function()
-            if config.Button[2].Callback then
-                config.Button[2].Callback()
+    local startTime = tick()
+    local cooldownEnded = false
+    RunService.RenderStepped:Connect(function()
+        if not cooldownEnded then
+            local elapsedTime = tick() - startTime
+            if elapsedTime < cooldown then
+                timeBar.Size = UDim2.new(1 - elapsedTime / cooldown, 0, 0, 5)
+                timeBar.BackgroundColor3 = Color3.fromRGB(255 - math.floor(elapsedTime / cooldown * 255), math.floor(elapsedTime / cooldown * 255), 0)
+            else
+                timeBar.Size = UDim2.new(0, 0, 0, 5)
+                cooldownEnded = true
             end
-            MainFrame:TweenPosition(UDim2.new(1, 320, 1, -160), Enum.EasingDirection.In, Enum.EasingStyle.Sine, 0.5, true, function()
-                ScreenGui:Destroy()
+        end
+    end)
+
+    local function endCooldown()
+        cooldownEnded = true
+        timeBar.Size = UDim2.new(0, 0, 0, 5)
+    end
+
+    notification.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            endCooldown()
+        end
+    end)
+
+    notification.TouchTap:Connect(function()
+        endCooldown()
+    end)
+
+    delay(cooldown, function()
+        if notification then
+            table.remove(notifications, table.find(notifications, notification))
+            local hideTween = TweenService:Create(notification, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {Position = UDim2.new(0, 5, 1, 10)})
+            hideTween:Play()
+            hideTween.Completed:Connect(function()
+                notification:Destroy()
+                updateNotificationPositions()
             end)
-        end)
-    end
-
-    local TimeBar = Instance.new("Frame")
-    TimeBar.Parent = MainFrame
-    TimeBar.Size = UDim2.new(0, 300, 0, 5)
-    TimeBar.Position = UDim2.new(0, 0, 1, -5)
-    TimeBar.BackgroundColor3 = Color3.new(0.2, 0.7, 0.2)
-    TimeBar.BorderSizePixel = 0
-
-    local TweenService = game:GetService("TweenService")
-    local goal = {Size = UDim2.new(0, 0, 0, 5)}
-    local tweenInfo = TweenInfo.new(config.Duration or 5, Enum.EasingStyle.Linear)
-    local timeTween = TweenService:Create(TimeBar, tweenInfo, goal)
-    timeTween:Play()
-
-    if config.Duration then
-        wait(config.Duration)
-        if Button and Button.Visible then
-            Button.Visible = false
         end
-        MainFrame:TweenPosition(UDim2.new(1, 320, 1, -160), Enum.EasingDirection.In, Enum.EasingStyle.Sine, 0.5, true, function()
-            ScreenGui:Destroy()
-        end)
-    end
+    end)
 end
 
 return NotificationLibrary
