@@ -99,7 +99,7 @@ function NotificationLibrary:makenotify(config)
         Button = Instance.new("TextButton")
         Button.Parent = MainFrame
         Button.Size = UDim2.new(0.4, 0, 0.15, 0)
-        Button.Position = UDim2.new(0.3, 0, 0.85, 0)
+        Button.Position = UDim2.new(0.3, 0, 0.85, -10)
         Button.Text = config.Button[2].name or "Button"
         Button.Font = Enum.Font.GothamBold
         Button.TextSize = 16
