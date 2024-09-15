@@ -1,29 +1,30 @@
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
 
 local NotificationLibrary = {}
 NotificationLibrary.__index = NotificationLibrary
 
-local function createNotificationCenter()
-    local player = Players.LocalPlayer
-    local playerGui = player:WaitForChild("PlayerGui")
+-- Services
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
 
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Parent = playerGui
+-- Local Player
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
-    local notificationCenter = Instance.new("Frame")
-    notificationCenter.Size = UDim2.new(0.3, 0, 1, 0)
-    notificationCenter.Position = UDim2.new(0.7, 0, 0, 0)
-    notificationCenter.BackgroundTransparency = 1
-    notificationCenter.Parent = screenGui
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
 
-    return notificationCenter
-end
+-- Create Notification Center
+local notificationCenter = Instance.new("Frame")
+notificationCenter.Size = UDim2.new(0.3, 0, 1, 0)
+notificationCenter.Position = UDim2.new(0.7, 0, 0, 0)
+notificationCenter.BackgroundTransparency = 1
+notificationCenter.Parent = screenGui
 
-local notificationCenter = createNotificationCenter()
 local notifications = {}
 
+-- Function to update notification positions
 local function updateNotificationPositions()
     for i, notification in ipairs(notifications) do
         local targetPos = UDim2.new(0, 0, 1, -(110 * i + 10 * (i - 1)) - 10)
@@ -31,13 +32,15 @@ local function updateNotificationPositions()
     end
 end
 
-function NotificationLibrary:CreateNotification(config)
+-- Function to create a notification
+function NotificationLibrary.createNotification(config)
     local title = config.title or "Title"
     local subtitle = config.subtitle or "Subtitle"
     local description = config.description or "Description"
     local iconImage = config.iconImage or ""
     local cooldown = config.cooldown or 5
 
+    -- Create Notification Frame
     local notification = Instance.new("Frame")
     notification.Size = UDim2.new(1, -10, 0, 100)
     notification.Position = UDim2.new(0, 5, 1, 10)
@@ -46,12 +49,14 @@ function NotificationLibrary:CreateNotification(config)
     notification.BorderSizePixel = 2
     notification.Parent = notificationCenter
 
+    -- Add Corner Radius
     local uiCorner = Instance.new("UICorner")
     uiCorner.CornerRadius = UDim.new(0, 10)
     uiCorner.Parent = notification
 
     table.insert(notifications, 1, notification)
 
+    -- Create Icon
     if iconImage ~= "" then
         local icon = Instance.new("ImageLabel")
         icon.Size = UDim2.new(0, 50, 0, 50)
@@ -61,6 +66,7 @@ function NotificationLibrary:CreateNotification(config)
         icon.Parent = notification
     end
 
+    -- Create Title
     local titleLabel = Instance.new("TextLabel")
     titleLabel.Size = UDim2.new(1, -60, 0.3, 0)
     titleLabel.Position = UDim2.new(0, 60, 0, 5)
@@ -72,6 +78,7 @@ function NotificationLibrary:CreateNotification(config)
     titleLabel.TextXAlignment = Enum.TextXAlignment.Left
     titleLabel.Parent = notification
 
+    -- Create Subtitle
     local subtitleLabel = Instance.new("TextLabel")
     subtitleLabel.Size = UDim2.new(1, -60, 0.2, 0)
     subtitleLabel.Position = UDim2.new(0, 60, 0.3, 0)
@@ -83,6 +90,7 @@ function NotificationLibrary:CreateNotification(config)
     subtitleLabel.TextXAlignment = Enum.TextXAlignment.Left
     subtitleLabel.Parent = notification
 
+    -- Create Description
     local descriptionLabel = Instance.new("TextLabel")
     descriptionLabel.Size = UDim2.new(1, -60, 0.3, 0)
     descriptionLabel.Position = UDim2.new(0, 60, 0.5, 0)
@@ -95,6 +103,7 @@ function NotificationLibrary:CreateNotification(config)
     descriptionLabel.TextXAlignment = Enum.TextXAlignment.Left
     descriptionLabel.Parent = notification
 
+    -- Create Time Bar
     local timeBar = Instance.new("Frame")
     timeBar.Size = UDim2.new(1, 0, 0, 5)
     timeBar.Position = UDim2.new(0, 0, 1, -5)
