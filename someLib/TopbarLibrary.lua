@@ -6,8 +6,7 @@ function TopbarLibrary:CreateToggle(options)
     local LocalPlayer = Players.LocalPlayer
     local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
         local TopbarStandard = game.CoreGui:WaitForChild("TopBarApp"):WaitForChild("TopBarFrame"):WaitForChild("LeftFrame")
-        local Left = TopbarStandard:WaitForChild("LeftFrame")
-    
+        
 
     local existingToggle = Left:FindFirstChild("Toggle")
     if existingToggle then
@@ -25,7 +24,7 @@ function TopbarLibrary:CreateToggle(options)
     Toggle.TextSize = 25
     Toggle.TextColor3 = Color3.new(1, 1, 1)
     Toggle.Font = Enum.Font.Code
-    Toggle.Parent = Left
+    Toggle.Parent = TopbarStandard
 
     local UICorner = Instance.new("UICorner")
     UICorner.CornerRadius = UDim.new(0, 9)
