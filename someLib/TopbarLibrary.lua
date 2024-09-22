@@ -1,23 +1,24 @@
-local T = {}
-T.__index = T
+local TopbarLibrary = {}
+TopbarLibrary.__index = TopbarLibrary
 
-function T:CT(options)
-    local P = game:GetService("Players")
-    local L = P.LocalPlayer
-    local G = L:WaitForChild("PlayerGui")
-    local T1 = G:FindFirstChild("TopbarStandard")
-    if not T1 then
-        local C = game:GetService("CoreGui")
-        local A = C:WaitForChild("TopBarApp")
-        local F = A:WaitForChild("TopBarFrame")
-        T1 = F:WaitForChild("LeftFrame")
+function TopbarLibrary:CreateToggle(options)
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+    
+    local TopbarStandard = PlayerGui:FindFirstChild("TopbarStandard")
+    if not TopbarStandard then
+        TopbarStandard = game.CoreGui:WaitForChild("TopBarApp"):WaitForChild("TopBarFrame"):WaitForChild("LeftFrame")
     end
-    local H = T1:WaitForChild("Holders")
-    local L1 = H:WaitForChild("Left")
+    
+    local Holders = TopbarStandard:WaitForChild("Holders")
+    local Left = Holders:WaitForChild("Left")
 
-    local existingToggle = L1:FindFirstChild("Toggle")
-    if existingToggle then existingToggle:Destroy() end
-
+    local existingToggle = Left:FindFirstChild("Toggle")
+    if existingToggle then
+        existingToggle:Destroy()
+    end
+    
     local Toggle = Instance.new("TextButton")
     Toggle.Name = "Toggle"
     Toggle.Size = UDim2.new(0, 33, 0, 32)
@@ -29,19 +30,19 @@ function T:CT(options)
     Toggle.TextSize = 25
     Toggle.TextColor3 = Color3.new(1, 1, 1)
     Toggle.Font = Enum.Font.Code
-    Toggle.Parent = L1
+    Toggle.Parent = Left
 
     local UICorner = Instance.new("UICorner")
     UICorner.CornerRadius = UDim.new(0, 9)
     UICorner.Parent = Toggle
 
     if options.ImageId then
-        local Image = Instance.new("ImageLabel")
-        Image.Size = UDim2.new(0, 25, 0, 25)
-        Image.Position = UDim2.new(0.5, -12, 0.5, -12)
-        Image.BackgroundTransparency = 1
-        Image.Image = "rbxassetid://" .. tostring(options.ImageId)
-        Image.Parent = Toggle
+        local ToggleImage = Instance.new("ImageLabel")
+        ToggleImage.Size = UDim2.new(0, 25, 0, 25)
+        ToggleImage.Position = UDim2.new(0.5, -12, 0.5, -12)
+        ToggleImage.BackgroundTransparency = 1
+        ToggleImage.Image = "rbxassetid://" .. tostring(options.ImageId)
+        ToggleImage.Parent = Toggle
         Toggle.Text = ""
     elseif options.Name then
         Toggle.Text = tostring(options.Name)
@@ -49,14 +50,20 @@ function T:CT(options)
         Toggle.Text = "Default"
     end
 
-    local Toggled = false
+    local isToggled = false
     local originalTransparency = 0.4
 
     Toggle.MouseButton1Click:Connect(function()
-        Toggled = not Toggled
-        Toggle.BackgroundTransparency = Toggled and 0.2 or originalTransparency
-        if options.Callback then options.Callback(Toggled) end
+        isToggled = not isToggled
+        if isToggled then
+            Toggle.BackgroundTransparency = 0.2
+        else
+            Toggle.BackgroundTransparency = originalTransparency
+        end
+        if options.Callback then
+            options.Callback(isToggled)
+        end
     end)
 end
 
-return T
+return TopbarLibrary
