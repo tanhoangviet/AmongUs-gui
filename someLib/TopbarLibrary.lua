@@ -5,14 +5,15 @@ function TopbarLibrary:CreateToggle(options)
     local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
     local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+    local Holders = TopbarStandard:WaitForChild("Holders")
+    local Left = Holders:WaitForChild("Left")
     
     local TopbarStandard = PlayerGui:FindFirstChild("TopbarStandard")
     if not TopbarStandard then
         TopbarStandard = game.CoreGui:WaitForChild("TopBarApp"):WaitForChild("TopBarFrame"):WaitForChild("LeftFrame")
+        local Left = TopbarStandard:WaitForChild("LeftFrame")
     end
     
-    local Holders = TopbarStandard:WaitForChild("Holders")
-    local Left = Holders:WaitForChild("Left")
 
     local existingToggle = Left:FindFirstChild("Toggle")
     if existingToggle then
