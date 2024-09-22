@@ -3,10 +3,28 @@ TopbarLibrary.__index = TopbarLibrary
 
 function TopbarLibrary:CreateToggle(options)
     local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
-    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-        local TopbarStandard = game.CoreGui:WaitForChild("TopBarApp"):WaitForChild("TopBarFrame"):WaitForChild("LeftFrame")
-        
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local function getTopbarStandard()
+    local topBarApp = game.CoreGui:FindFirstChild("TopBarApp")
+    if topBarApp then
+        local topBarFrame = topBarApp:FindFirstChild("TopBarFrame")
+        if topBarFrame then
+            local leftFrame = topBarFrame:FindFirstChild("LeftFrame")
+            if leftFrame then
+                return leftFrame
+            end
+        end
+    end
+    return nil
+end
+
+local TopbarStandard = playerGui:WaitForChild("TopbarStandard") or getTopbarStandard()
+
+if not TopbarStandard then
+    error("TopbarStandard không tìm thấy!")
+    end
 
     local existingToggle = Left:FindFirstChild("Toggle")
     if existingToggle then
