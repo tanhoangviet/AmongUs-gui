@@ -719,14 +719,13 @@ function OrionLib:MakeWindow(WindowConfig)
 	end	
 
 function OrionLib:ApplyStroke(StrokeConfig)
-    local parent = StrokeConfig.Parent
     local colorConfig = StrokeConfig.StrokeColor
     local useGradient = StrokeConfig.UseGradient
 
     if not parent:FindFirstChildOfClass("UIStroke") then
         local stroke = Instance.new("UIStroke")
         stroke.Thickness = StrokeConfig.Thickness or 2
-        stroke.Parent = parent
+        stroke.Parent = Frame
         
         if useGradient then
             local gradient = Instance.new("UIGradient")
